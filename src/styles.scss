@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import './styles/theme';
+
+body {
+  margin: 0;
+}
+
+.content-container {
+  padding: 20px;
+}
+
+.wide-form {
+  .mat-form-field {
+    display: block;
+  }
+  .buttons {
+    display: flex;
+    button {
+      margin-right: 8px;
+    }
+  }
+}
+
+.inline-flex-form {
+  .flex-form-item {
+    margin-right: 10px;
+  }
+}

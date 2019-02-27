@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-title>Saved Groupings</mat-card-title>
+  <mat-card-content>
+    <mat-action-list *ngIf="groupings">
+      <button *ngFor="let grouping of groupings" mat-list-item
+        (click)="goToGrouping(grouping.id)">{{ grouping.name }}</button>
+    </mat-action-list>
+  </mat-card-content>
+</mat-card>

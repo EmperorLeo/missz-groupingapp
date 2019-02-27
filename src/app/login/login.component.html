@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-title>Miss Z's Grouping App</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="loginForm" (submit)="login()" class="form-container">
+      <mat-form-field>
+        <input matInput placeholder="Username" formControlName="username">
+        <mat-error>Required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" formControlName="password" type="password">
+        <mat-error>Required</mat-error>
+      </mat-form-field>
+      <button mat-raised-button type="submit" color="primary">Login</button>
+    </form>
+  </mat-card-content>
+</mat-card>

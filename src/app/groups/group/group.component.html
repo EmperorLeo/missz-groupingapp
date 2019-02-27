@@ -1,0 +1,69 @@
+<mat-card *ngIf="groups">
+  <mat-card-title>Groups</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="saveGroupingForm" (submit)="saveGrouping()">
+      <mat-form-field>
+        <input matInput placeholder="Grouping Name" formControlName="name">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Save Grouping</button>
+    </form>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let group of groups; let gi = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Group {{ gi + 1 }}
+          </mat-panel-title>
+          <mat-panel-description *ngIf="group.members.length > 0">
+            Captain: {{ group.members[0] }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list>
+          <mat-list-item role="listitem" *ngFor="let member of group.members">{{ member }}</mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-title>Generate Groups</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="generateForm" (submit)="generateGroups()" class="inline-flex-form">
+      <mat-form-field *ngIf="generateFormSlider.checked" class="flex-form-item">
+        <input matInput type="number" placeholder="Group Size" formControlName="groupSize">
+        <mat-error *ngIf="generateForm.get('groupSize').hasError('required')">Required</mat-error>
+        <mat-error *ngIf="generateForm.get('groupSize').hasError('min')">Group size must be positive.</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="!generateFormSlider.checked" class="flex-form-item">
+        <input matInput type="number" placeholder="Group Number" formControlName="groupNumber">
+        <mat-error *ngIf="generateForm.get('groupNumber').hasError('required')">Required</mat-error>
+        <mat-error *ngIf="generateForm.get('groupNumber').hasError('min')">Group number must be positive.</mat-error>
+      </mat-form-field>
+      <mat-slide-toggle #generateFormSlider class="flex-form-item" (change)="generateFormToggleChanged($event)">
+        <---- ZAP ⚡</mat-slide-toggle> <button mat-raised-button color="primary" type="submit"
+          [disabled]="people.length === 0 || !generateForm.valid">Generate</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-title>Members</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="addPersonForm" (submit)="addPerson()" class="wide-form">
+      <mat-form-field>
+        <input matInput placeholder="New Person" formControlName="person">
+        <mat-error>Required</mat-error>
+      </mat-form-field>
+      <div class="buttons">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!addPersonForm.valid">Add</button>
+        <button mat-raised-button color="accent" type="button" (click)="startImportNames()">Import Names</button>
+        <button mat-raised-button color="error" type="button" (click)="deleteSelected()"
+          [disabled]="selectionList.selectedOptions.selected.length === 0">Delete Selected</button>
+      </div>
+    </form>
+    <mat-selection-list>
+      <mat-list-option *ngFor="let person of people" [value]="person">
+        {{person}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

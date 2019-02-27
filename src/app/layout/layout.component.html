@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Miss Z's Grouping App</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" (click)="logout()">Logout</button>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">All Groupings</a>
+    <a routerLink="/new" routerLinkActive="active">Add/Edit Grouping</a>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<div class="content-container">
+  <router-outlet></router-outlet>
+</div>
